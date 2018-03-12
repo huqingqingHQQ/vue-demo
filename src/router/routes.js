@@ -4,6 +4,7 @@ import seller from '@/components/seller/seller';
 
 //编写路由集合
 const routes = [
+  { path: '/',redirect: 'goods'},
   { path: '/goods', component: goods },
   { path: '/ratings', component: ratings },
   { path: '/seller', component: seller }
