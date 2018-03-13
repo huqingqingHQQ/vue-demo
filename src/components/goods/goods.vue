@@ -1,6 +1,6 @@
 <template>
   <div id="goods">
-  	I am goods,,,
+  	I am goods
   </div>
 </template>
 

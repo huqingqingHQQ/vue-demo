@@ -7,6 +7,7 @@ Vue.use(VueRouter);
 
 //实例化router对象
 const router = new VueRouter({
+	linkActiveClass :'active',
 	mode: 'hash',//设置路由模式
 	routes: routes///挂在路由集合
 });
