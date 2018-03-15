@@ -17,7 +17,7 @@
     			<div class="text">{{seller.supports[0].description}}</div>
     		</div>
     	</div>
-    	<div class="support-count" v-if="seller.supports">
+    	<div class="support-count" v-if="seller.supports" @click="showDetail">
     		<span class="count">{{seller.supports.length}}个</span>
     		<i class="icon-arrow-right"></i>
     	</div>
@@ -26,19 +26,58 @@
     	<span class="bulletin-title"></span><span class="bulletin-text">{{seller.bulletin}}</span>
     	<i class="icon-arrow-right"></i>
     </div>
+    <div class="background">
+    	<img :src="seller.avatar" width="100%" height="100%">
+    </div>
+    <div v-show="detailShow" class="detail">
+    	<div class="detail-wrapper clearfix">
+    		<div class="detail-main">
+    			<h1 class="name">{{seller.name}}</h1>
+    			<div class="star-wrapper">
+    				<star :size="48" :score="seller.score"></star>
+    			</div>
+    			<div class="title">
+    				<div class="line"></div>
+    				<div class="text">优惠信息</div>
+    				<div class="line"></div>
+    			</div>
+    			<ul v-if="seller.supports" class="supports"> 
+    				<li class="support-item" v-for="item in seller.supports">
+    					<span class="icon" :class="classMap[seller.supports[$index].type]"></span>
+    				</li>
+    			</ul>
+    		</div>
+    	</div>
+    	<div class="detail-close">
+    		<i class="icon-close"></i>
+    	</div>
+    </div>
   </div>
 </template>
 
 <script>
-
+	import star from "../../components/star/star.vue";
   export default {
   	props: {
   		seller: {
   			type: Object
   		}
   	},
+  	data() {
+  		return {
+  			detailShow: false
+  		};
+  	},
+  	methods: {
+  		showDetail() {
+  			this.detailShow = true;
+  		}
+  	},
   	created() {
   		this.classMap = ['decrease','discount','special','invoice','guarantee']
+  	},
+  	components: {
+  		star
   	}
   }
 
@@ -47,8 +86,10 @@
 <style lang="stylus" rel="stylesheet/stylus">
 	@import "../../commen/stylus/mixin.styl";
 	.header
+		position:relative
 		color: #fff
-		background: #999
+		overflow: hidden
+		background: rgba(7,17,27,0.5)
 		.content-wrapper
 			padding: 24px 12px 18px 24px
 			font-size: 0
@@ -147,6 +188,59 @@
 				font-size: 10px
 				right: 12px
 				top: 8px
+		.background
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			filter: blur(10px)
+			z-index: -1
+		.detail
+			position: fixed
+			z-index: 100
+			width: 100%
+			height: 100%
+			overflow: auto
+			background: rgba(7,17,27,0.8)
+			top: 0
+			left: 0
+			.detail-wrapper
+				width: 100%
+				min-height: 100%
+				.detail-main
+					margin-top: 64px
+					padding-bottom: 64px
+					.name
+						font-size: 16px
+						line-height: 16px
+						text-align: center
+						font-weight: 700
+					.star-wrapper
+						margin-top: 18px
+						padding: 2px 0
+						text-align: center
+					.title
+						display: flex
+						width: 80%
+						margin: 28px auto 24px
+						.line
+							flex: 1
+							position: relative
+							top: -6px
+							border-bottom: 1px solid rgba(255,255,255,0.2)
+						.text
+							padding: 0 12px
+							font-size: 14px
+							font-weight: 700
+
+			.detail-close
+				position: relative
+				width: 32px
+				height: 32px
+				margin: -64px auto 0
+				clear: both
+				font-size: 32px
 
 
 
