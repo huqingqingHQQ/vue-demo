@@ -31,7 +31,7 @@
 				} else {
 					this.food.count++;
 				}
-				this.$dispatch('cart.add',event.target);
+				this.$emit('cart.add',event.target);
 			},
 			decreaseCart(event) {
 				if (!event._constructed) {
@@ -56,7 +56,7 @@
 			color: rgb(0,160,220)
 			transition: all 0.4s linear
 			opacity: 1
-			transform: translate3D(0,0,0)
+			transform: translate3d(0,0,0)
 			.inner
 				display: inline-block
 				line-height: 20px
@@ -66,7 +66,7 @@
 				transform: rotate(0)
 			&.move-enter,&.move-leave-active
 				opacity: 0
-				transform: translate3D(24px,0,0)
+				transform: translate3d(24px,0,0)
 				.inner
 					transform: rotate(180deg)
 		.cart-decrease
