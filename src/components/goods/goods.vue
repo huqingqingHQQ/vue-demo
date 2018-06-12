@@ -42,6 +42,7 @@
 	  	<shopcart ref="shopcart" :select-foods="selectFoods" :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
 	  </div>
 	  <food :food="selectedFood" ref="food"></food>
+	  <!-- 调用子组件里面的方法ref，然后在下面用子组件的show（）方法this.$refs.food.show(); -->
     </div>
 </template>
 
